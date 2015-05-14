@@ -1,30 +1,25 @@
-/**
-* @jsx React.DOM
-*/
-
 var React = require('react');
 
 class App extends React.Component {
-  constuctor(props) {
-    console.log(props);
+  constructor(props) {
     super(props);
-    this.setState = {message: this.props.message}
+    this.state = {message: props.message}
+  }
+
+  handleClick() {
+    this.setState({message: 'Bye'});
   }
 
   render() {
     return (
-      <h1>{this.state.message}</h1>
+      <h1 onClick={this.handleClick.bind(this)}>{this.state.message}</h1>
     );
   }
 
 };
 
 App.propTypes = {
-  message: React.PropTypes.string 
+  message: React.PropTypes.string.isRequired
 };
-App.defaultProps = {
-  message: 'hi'
-}
 
-
-React.render(<App message="Hello World"/>, document.getElementById('app'));
+React.render(<App message="Hi"/>, document.getElementById('app'));
