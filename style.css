@@ -1,5 +1,5 @@
 * {
-    background-color: #0F0F0F;
+    background-color: #878686;
 }
 
 html, body {
@@ -20,7 +20,7 @@ h1:hover {
 .container div {
     font-family: OpenSans;
     margin: 0;
-    color: #878686;
+    color: #0F0F0F;
     position: relative;
     transform: translate(50%, 50%);
 }
