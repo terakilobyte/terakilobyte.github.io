@@ -1,5 +1,11 @@
 var React = require('react');
 
+var messages = {
+  'Hi': 'Bye',
+  'Bye': 'Hi'
+};
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -7,7 +13,7 @@ class App extends React.Component {
   }
 
   handleClick() {
-    this.setState({message: 'Bye'});
+    this.setState({message: messages[this.state.message]});
   }
 
   render() {
