@@ -6,13 +6,13 @@ import './Navbar.scss';
 export default class Navbar extends React.Component {
   render () {
     return (
-      <ul className='navigation-items'>
-        <li>About me</li>
-        <li>Blog</li>
-        <li>Twitter</li>
-        <li>Github</li>
-        <li>Playground</li>
-      </ul>
+      <div className='navigation-items'>
+        <Link className='links' to='/about'>About me</Link>
+        <Link className='links' to='//terakilobyte.com'>Blog</Link>
+        <Link className='links' to='//twitter.com/terakilobyte'>Twitter</Link>
+        <Link className='links' to='//github.com/terakilobyte'>Github</Link>
+        <Link className='links' to='/playground'>Playground</Link>
+      </div>
     );
   }
 }

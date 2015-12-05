@@ -7,6 +7,10 @@
   text-align: center;
 }
 
+.view-container {
+  transform: translateY(7vh);
+}
+
 .splash-image {
   background: url('https://s3.amazonaws.com/terakilobyte.com/files/pic.io.pages.terakilobyte.jpg');
   height: 100vh;
@@ -30,4 +34,5 @@
   -webkit-box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.75);
   box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.75);
+  z-index: 1;
 }

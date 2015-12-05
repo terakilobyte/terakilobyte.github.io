@@ -1,7 +1,6 @@
 import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
-import { Link }               from 'react-router';
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -28,8 +27,7 @@ export class HomeView extends React.Component {
           <h1>Hello, I'm Nathan</h1>
         </div>
         <div className='container text-center'>
-          <h1>Welcome to the React Redux Starter Kit</h1>
-          <Link to='/about'>Go To About View</Link>
+          <h5>Let's build things</h5>
         </div>
       </div>
     );
