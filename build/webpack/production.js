@@ -9,7 +9,8 @@ if (config.get('production_enable_source_maps')) {
 
 webpackConfig.output = Object.assign(webpackConfig.output, {
   filename   : '[name].[hash].js',
-  publicPath : '/dist/'
+  publicPath : '/',
+  path: ''
 });
 
 webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
