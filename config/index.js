@@ -36,7 +36,7 @@ config.set('dir_base', path.resolve(__dirname, '../'));
 
 config.set('dir_client', 'src');    // where React app source code lives
 config.set('dir_server', 'server'); // where server source code lives
-config.set('dir_dist',   'dist');   // where to deploy compiled code
+config.set('dir_dist',   './');   // where to deploy compiled code
 config.set('dir_test',   'tests');  // where tests live
 
 // ------------------------------------
