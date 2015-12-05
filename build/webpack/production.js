@@ -7,6 +7,11 @@ if (config.get('production_enable_source_maps')) {
   webpackConfig.devtool = 'source-map';
 }
 
+webpackConfig.output = Object.assign(webpackConfig.output, {
+  filename   : '[name].[hash].js',
+  publicPath : '/dist/'
+});
+
 webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
   if (/css/.test(loader.test)) {
     const [first, ...rest] = loader.loaders;
