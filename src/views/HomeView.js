@@ -1,7 +1,6 @@
 import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
-import counterActions         from 'actions/counter';
 import { Link }               from 'react-router';
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
@@ -14,7 +13,7 @@ const mapStateToProps = (state) => ({
   routerState : state.router
 });
 const mapDispatchToProps = (dispatch) => ({
-  actions : bindActionCreators(counterActions, dispatch)
+  actions : bindActionCreators(dispatch)
 });
 export class HomeView extends React.Component {
   static propTypes = {
@@ -24,15 +23,14 @@ export class HomeView extends React.Component {
 
   render () {
     return (
-      <div className='container text-center'>
-        <h1>Welcome to the React Redux Starter Kit</h1>
-        <h2>Sample Counter: {this.props.counter}</h2>
-        <button className='btn btn-default'
-                onClick={this.props.actions.increment}>
-          Increment
-        </button>
-        <hr />
-        <Link to='/about'>Go To About View</Link>
+      <div>
+        <div className='splash-image'>
+          <h1>Hello, I'm Nathan</h1>
+        </div>
+        <div className='container text-center'>
+          <h1>Welcome to the React Redux Starter Kit</h1>
+          <Link to='/about'>Go To About View</Link>
+        </div>
       </div>
     );
   }

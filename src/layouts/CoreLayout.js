@@ -1,5 +1,6 @@
 import React from 'react';
 import 'styles/core.scss';
+import Navbar from '../components/Navbar/Navbar';
 
 export default class CoreLayout extends React.Component {
   static propTypes = {
@@ -9,6 +10,9 @@ export default class CoreLayout extends React.Component {
   render () {
     return (
       <div className='page-container'>
+        <div className='navbar'>
+          <Navbar />
+        </div>
         <div className='view-container'>
           {this.props.children}
         </div>

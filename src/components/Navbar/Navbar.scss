@@ -1,0 +1,18 @@
+.navigation-items {
+  list-style: none;
+  float: left;
+  width: 100vw;
+  margin-top: 0;
+}
+
+.navigation-items li {
+  display: inline-block;
+  margin-top: 2vh;
+  padding: 10px;
+  &:hover {
+    background-color: hsl(242, 18, 35);
+    border-radius: 5px;
+    border-bottom: 3px solid hsl(242, 5, 85);
+    cursor: pointer;
+  }
+}
