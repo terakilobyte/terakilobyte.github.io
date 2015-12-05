@@ -8,9 +8,9 @@ export default class Navbar extends React.Component {
     return (
       <div className='navigation-items'>
         <Link className='links' to='/about'>About me</Link>
-        <a className='links' href='//terakilobyte.com'>Blog</a>
-        <a className='links' href='//twitter.com/terakilobyte'>Twitter</a>
-        <a className='links' href='//github.com/terakilobyte'>Github</a>
+        <a className='links' href='//www.terakilobyte.com'>Blog</a>
+        <a className='links' href='//www.twitter.com/terakilobyte'>Twitter</a>
+        <a className='links' href='//www.github.com/terakilobyte'>Github</a>
         <Link className='links' to='/playground'>Playground</Link>
       </div>
     );
