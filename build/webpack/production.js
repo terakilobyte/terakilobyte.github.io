@@ -1,4 +1,3 @@
-import webpack           from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import config            from '../../config';
 import webpackConfig     from './_base';
@@ -24,13 +23,16 @@ webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
 });
 
 webpackConfig.plugins.push(
-  new ExtractTextPlugin('[name].[hash].css'),
-  new webpack.optimize.UglifyJsPlugin({
+  new ExtractTextPlugin('[name].[hash].css')
+);
+
+export default webpackConfig;
+
+/* yanked from uglify
+{
     compress : {
       'unused'    : true,
       'dead_code' : true
     }
-  })
-);
-
-export default webpackConfig;
+  }
+  */

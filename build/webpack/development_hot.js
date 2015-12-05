@@ -1,5 +1,4 @@
 import webpack       from 'webpack';
-import config        from '../../config';
 import webpackConfig from './development';
 
 webpackConfig.entry.app.push(
