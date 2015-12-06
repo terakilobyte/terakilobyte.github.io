@@ -17,11 +17,15 @@ export default class GameTile extends React.Component {
     const input = this.refs.input;
     input.setAttribute('disabled', 'true');
     const tile = this.refs.tile;
+    tile.classList.remove('active');
+    setTimeout(() => {
+      tile.classList.add('cross');
+    }, 200);
   }
 
   render () {
     return (
-      <div className='game-tile' ref='tile'>
+      <div className='game-tile active' ref='tile'>
         <input id={`${this.props.row}${columns[this.props.column]}`}
           onClick={this.handleClick.bind(this)}
           ref='input'

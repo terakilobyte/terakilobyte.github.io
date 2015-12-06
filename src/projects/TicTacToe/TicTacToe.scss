@@ -8,6 +8,8 @@
   text-align: center;
   font-size: 2em;
   line-height: 50px;
+  animation: shake .1s,
+             explode .05s;
 }
 
 .cross:before {
@@ -44,7 +46,7 @@
 input[type='checkbox'] {
   display: none;
   &:checked ~ label:before {
-    animation: scale .4s;
+    animation: scale .2s;
   }
 }
 
@@ -76,9 +78,12 @@ input[type='checkbox'] {
     border-left: 3px solid $textColor;
     border-right: 3px solid $textColor;
   }
-  &:hover {
+}
+
+.active {
+   &:hover {
     background-color: $tileHover;
-  }
+  } 
 }
 
 label {
@@ -90,7 +95,7 @@ label {
     display: block;
     position: absolute;
     opacity: 0;
-    background-color: $tileClick;
+    background-color: $textColor;
     width: 2px;
     height: 2px;
     border-radius: 50%;
@@ -103,11 +108,41 @@ label {
   0% {
     opacity: 1;
   }
-  100% {
+  1% {
     width: 200px;
     height: 200px;
     left: -150%;
     top: -150%;
+  }
+  100% {
+    width: 50px;
+    height: 50px;
+    left: 0%;
+    top: 0%;
     opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translate3d(-2px, 0, 0);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translate3d(2px, 0, 0);
+  }
+}
+
+@keyframes explode {
+  0%, 100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(.1);
+  }
+  80% {
+    transform: scale(2.1);
   }
 }
