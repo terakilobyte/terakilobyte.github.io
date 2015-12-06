@@ -1,5 +1,11 @@
 @import 'base';
-@import 'vendor/normalize';
+
+
+html, body {
+  height: 100%;
+  margin: 0 auto;
+  background-color: hsl(240, 22, 75);
+}
 
 .mainbody {
   font-family: RobotoDraft;
@@ -8,12 +14,13 @@
 }
 
 .view-container {
-  transform: translateY(7vh);
+  position: relative;
+  top: 7vh;
 }
 
 .splash-image {
   background: url('https://s3.amazonaws.com/terakilobyte.com/files/pic.io.pages.terakilobyte.jpg');
-  height: 100vh;
+  height: 93vh;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -22,17 +29,4 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.navbar {
-  position: fixed;
-  background-color: hsl(240, 25, 50);
-  display: inline-block;
-  margin: 0 auto;
-  height: 7vh;
-  border-raius: 0px;
-  -webkit-box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.75);
-  box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.75);
-  z-index: 1;
 }

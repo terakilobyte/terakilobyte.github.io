@@ -12,9 +12,7 @@ export default class CoreLayout extends React.Component {
   render () {
     return (
       <div>
-        <div className='navbar'>
-          <Navbar />
-        </div>
+        <Navbar />
         <div className='view-container'>
           {this.props.children}
         </div>

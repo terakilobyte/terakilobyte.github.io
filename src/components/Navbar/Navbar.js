@@ -7,7 +7,8 @@ export default class Navbar extends React.Component {
   render () {
     return (
       <div className='navigation-items'>
-        <Link className='links' to='/about'>About me</Link>
+        <Link className='links' to='/'>Home</Link>
+        <Link className='links' to='/about'>About</Link>
         <a className='links' href='//www.terakilobyte.com'>Blog</a>
         <a className='links' href='//www.twitter.com/terakilobyte'>Twitter</a>
         <a className='links' href='//www.github.com/terakilobyte'>Github</a>

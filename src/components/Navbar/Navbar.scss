@@ -1,21 +1,28 @@
+@import 'base';
+
 .navigation-items {
-  list-style: none;
-  float: left;
-  width: 100vw;
-  margin-top: 0;
-  height: 5vh;
+  position: fixed;
+  background-color: $purple;
+  height: 7vh;
+  border-radius: 0px;
+  box-shadow: 0px 3px 20px 0px rgba(0,0,0,0.75);
+  z-index: 1;
+  width: 100%;
 }
 
 .navigation-items .links{
+  line-height: 7vh;
+  padding: 0 20px;
   display: inline-block;
-  margin-top: 2vh;
-  padding: 10px;
+  color: darken($white, 10%);
   &:hover {
-    background-color: hsl(242, 18, 35);
-    border-radius: 5px;
-    border-bottom: 3px solid hsl(242, 5, 85);
+    background-color: lighten($purple, 10%);
+    // background-color: $purple;
+    // border-radius: 5px;
+    // border-bottom: 3px solid hsl(242, 5, 85);
     cursor: pointer;
   }
-  color: hsl(0, 1, 15);
+  //color: lighten($black, 2%);
+
   text-decoration: none;
 }
