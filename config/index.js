@@ -122,7 +122,8 @@ config.set('utils_aliases', [
   'store',
   'styles',
   'utils',
-  'views'
+  'views',
+  'projects'
 ].reduce((acc, dir) => ((acc[dir] = paths.client(dir)) && acc), {}));
 
 export default config;
