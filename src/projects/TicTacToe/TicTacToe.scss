@@ -21,23 +21,23 @@
 /* Final Status */
 .final-45 {
   @include linear-gradient(45deg,
-               $darkjunglegreen 45%,
-              white 0, white 55%, $darkjunglegreen 0);
+               $textColor 45%,
+              $background 0, $background 55%, $textColor 0);
 }
 .final-135 {
   @include linear-gradient(135deg,
-               $darkjunglegreen 45%,
-              white 0, white 55%, $darkjunglegreen 0);
+               $textColor 45%,
+              $background 0, $background 55%, $textColor 0);
 }
 .final-90 {
   @include linear-gradient(90deg,
-               $darkjunglegreen 45%,
-              white 0, white 55%, $darkjunglegreen 0);
+               $textColor 45%,
+              $background 0, $background 55%, $textColor 0);
 }
 .final-180 {
   @include linear-gradient(180deg,
-               $darkjunglegreen 45%,
-              white 0, white 55%, $darkjunglegreen 0);
+               $textColor 45%,
+              $background 0, $background 55%, $textColor 0);
 }
 
 /* Boxes */
@@ -59,10 +59,10 @@ input[type='checkbox'] {
   height: 50px;
   display: block;
   &:first-child {
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid $textColor;
   }
   &:last-child {
-    border-top: 3px solid black;
+    border-top: 3px solid $textColor;
   }
 }
 
@@ -73,11 +73,11 @@ input[type='checkbox'] {
   transition: background-color .2s ease-out;
   position: relative;
   &:nth-child(2) {
-    border-left: 3px solid black;
-    border-right: 3px solid black;
+    border-left: 3px solid $textColor;
+    border-right: 3px solid $textColor;
   }
   &:hover {
-    background-color: lighten($titanwhite, 10%);
+    background-color: $tileHover;
   }
 }
 
@@ -90,7 +90,7 @@ label {
     display: block;
     position: absolute;
     opacity: 0;
-    background-color: lighten($titanwhite, 10%);
+    background-color: $tileClick;
     width: 2px;
     height: 2px;
     border-radius: 50%;
