@@ -26,7 +26,7 @@ export class HomeView extends React.Component {
         <div className='splash-image'>
           <h1>Hello, I'm Nathan</h1>
         </div>
-        <div className='container text-center'>
+        <div className='text-center'>
           <h5>Let's build things</h5>
         </div>
       </div>

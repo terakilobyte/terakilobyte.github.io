@@ -4,7 +4,7 @@
 html, body {
   height: 100%;
   margin: 0 auto;
-  background-color: hsl(240, 22, 75);
+  background-color: $lightPurple;
 }
 
 .mainbody {
@@ -15,7 +15,7 @@ html, body {
 
 .view-container {
   position: relative;
-  top: 7vh;
+  transform: translateY(7vh);
 }
 
 .splash-image {
