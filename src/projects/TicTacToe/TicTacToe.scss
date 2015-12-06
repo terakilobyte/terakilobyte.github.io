@@ -21,23 +21,23 @@
 /* Final Status */
 .final-45 {
   @include linear-gradient(45deg,
-               $lightPurple 45%,
-              white 0, white 55%, $lightPurple 0);
+               $darkjunglegreen 45%,
+              white 0, white 55%, $darkjunglegreen 0);
 }
 .final-135 {
   @include linear-gradient(135deg,
-               $lightPurple 45%,
-              white 0, white 55%, $lightPurple 0);
+               $darkjunglegreen 45%,
+              white 0, white 55%, $darkjunglegreen 0);
 }
 .final-90 {
   @include linear-gradient(90deg,
-               $lightPurple 45%,
-              white 0, white 55%, $lightPurple 0);
+               $darkjunglegreen 45%,
+              white 0, white 55%, $darkjunglegreen 0);
 }
 .final-180 {
   @include linear-gradient(180deg,
-               $lightPurple 45%,
-              white 0, white 55%, $lightPurple 0);
+               $darkjunglegreen 45%,
+              white 0, white 55%, $darkjunglegreen 0);
 }
 
 /* Boxes */
@@ -77,7 +77,7 @@ input[type='checkbox'] {
     border-right: 3px solid black;
   }
   &:hover {
-    background-color: lighten($lightPurple, 10%);
+    background-color: lighten($titanwhite, 10%);
   }
 }
 
@@ -90,7 +90,7 @@ label {
     display: block;
     position: absolute;
     opacity: 0;
-    background-color: lighten($lightPurple, 10%);
+    background-color: lighten($titanwhite, 10%);
     width: 2px;
     height: 2px;
     border-radius: 50%;

@@ -6,6 +6,13 @@
 
 @import 'colors';
 
+html, body {
+  height: 100%;
+  margin: 0 auto;
+  background-color: $titanwhite;
+  font-family: Roboto;
+}
+
 .text-center {
   text-align: center;
 }

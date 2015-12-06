@@ -5,13 +5,13 @@
   width: 20vh;
   height: 20vh;
   display: inline-block;
-  background-color: $darkenLightPurple;
+  background-color: darken($titanwhite, 10%);
   box-shadow: 0 5px 20px hsla(0, 0%, 0%, .4) inset;
   transition: background-color .2s linear,
               box-shadow .1s linear,
               transform .5s cubic-bezier(0, 1.8, 1, 1.8);
   &:hover {
-    background-color: lighten($lightPurple, 10%);
+    background-color: $titanwhite;
     box-shadow: 0 5px 40px hsla(0, 0, 0, .4);
     transform: scale(1.12);
   }
