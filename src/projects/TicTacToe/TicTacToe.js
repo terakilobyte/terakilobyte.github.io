@@ -1,6 +1,8 @@
 import React from 'react';
 import './TicTacToe.scss';
 
+import GameBoard from './components/GameBoard';
+
 export default class TicTacToe extends React.Component {
   static propTypes = {
 
@@ -10,7 +12,14 @@ export default class TicTacToe extends React.Component {
     return (
       <div>
         <h1 className='text-center'>Tic-Tac-Toe</h1>
-        <div className='game-board'>
+        <GameBoard />
+      </div>
+    );
+  }
+}
+
+/*
+<div className='game-board'>
           <div className='game-row'>
             <div className='game-tile   '>
               <input id='topLeft' type='checkbox' />
@@ -54,7 +63,4 @@ export default class TicTacToe extends React.Component {
             </div>
           </div>
         </div>
-      </div>
-    );
-  }
-}
+*/
