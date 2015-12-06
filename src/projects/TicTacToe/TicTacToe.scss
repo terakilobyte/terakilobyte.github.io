@@ -1,5 +1,6 @@
 @import 'base';
 
+/* Icons */
 .cross:before, .nought:before {
   display: block;
   width: 100%;
@@ -17,6 +18,29 @@
   content: 'O';
 }
 
+/* Final Status */
+.final-45 {
+  @include linear-gradient(45deg,
+               $lightPurple 45%,
+              white 0, white 55%, $lightPurple 0);
+}
+.final-135 {
+  @include linear-gradient(135deg,
+               $lightPurple 45%,
+              white 0, white 55%, $lightPurple 0);
+}
+.final-90 {
+  @include linear-gradient(90deg,
+               $lightPurple 45%,
+              white 0, white 55%, $lightPurple 0);
+}
+.final-180 {
+  @include linear-gradient(180deg,
+               $lightPurple 45%,
+              white 0, white 55%, $lightPurple 0);
+}
+
+/* Boxes */
 input[type='checkbox'] {
   display: none;
   &:checked ~ label:before {
