@@ -46,22 +46,21 @@ const minimax = (function () {
     mini.board[boardToArray[position]] = 'P';
   };
 
-  /*
-   *  Returns false if an endstate hasn't been reached.
-   *  Returns an object of
-   *  {
-   *    winner: true,
-   *    sigil: <x or o>,
-   *    winningSquares: string of winnings square ('012')
-   *    winningDirection: string of winning direction ('final-90')
-   *  }
-   *  if there is a winner.
-   *  Returns an an object of
-   *  {
-   *    winner: draw
-   *  }
-   *  in case of a draw
-  */
+  // Returns false if an endstate hasn't been reached.
+  // Returns an object of
+  // {
+  //   winner: true,
+  //   sigil: <x or o>,
+  //   winningSquares: string of winnings square ('012')
+  //   winningDirection: string of winning direction ('final-90')
+  // }
+  // if there is a winner.
+  // Returns an an object of
+  // {
+  //   winner: draw
+  // }
+  // in case of a draw
+
   mini.endState = function () {
     const noOpenSquares = this.board.indexOf(0) === -1;
     const winningPosition = winningPositions.reduce((acc, curr) => {
@@ -71,7 +70,10 @@ const minimax = (function () {
     }, []).filter(elem => {
       return elem.reduce((acc, curr) => {
         if (curr === 0) {
+          /*eslint-disable*/
+          // in this case it's perfectly fine to write the acc(umulator)
           acc = false;
+          /*eslint-enable*/
         }
         return acc;
       }, true);
