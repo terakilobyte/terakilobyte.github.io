@@ -6,7 +6,16 @@ import { PLAYER_MOVE,
          DRAW_GAME,
          DEPTH_INCREMENT } from 'constants/tictactoe';
 
-const initialState = 0;
+import miniMax from 'projects/TicTacToe/minimax.js';
+
+
+const initialState = {
+  board: [],
+  depth: 0,
+  playerTurn: true,
+  playerSigil: 'x'
+};
+
 export default createReducer(initialState, {
   [PLAYER_MOVE] : (state) => state + 1,
   [COMPUTER_MOVE]: (state) => state + 1,
