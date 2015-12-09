@@ -1,13 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 const AboutView = () => (
   <div>
     <div>
-      <h1>There isn't a lot to see here, is there?</h1>
-      <hr />
+      <h1>I'm Nathan. I enjoy learning new things, chess, and building things with JavaScript and Elixir. I really really like elixir</h1>
     </div>
-    <Link to='/'>Back To Home View</Link>
   </div>
 );
 

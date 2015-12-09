@@ -26,7 +26,6 @@ const minimax = (function () {
     8: 'bottomRight'
   };
 
-  // who needs lodash?
   const boardToArray = Object.keys(arrayToBoard).reduce((acc, key) => {
     acc[arrayToBoard[key]] = key;
     return acc;
@@ -36,35 +35,21 @@ const minimax = (function () {
 
   mini.board = [];
   mini.playerTurn = true;
+  mini.depth = 0;
 
   mini.init = function (playerTurn) {
     this.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     this.playerTurn = playerTurn;
   };
 
-  mini.playerMoved = function (position) {
-    mini.board[boardToArray[position]] = 'P';
+  mini.advance = function () {
+    mini.playerTurn = mini.playerTurn === 'X' ? 'O' : 'X';
   };
 
-  // Returns false if an endstate hasn't been reached.
-  // Returns an object of
-  // {
-  //   winner: true,
-  //   sigil: <x or o>,
-  //   winningSquares: string of winnings square ('012')
-  //   winningDirection: string of winning direction ('final-90')
-  // }
-  // if there is a winner.
-  // Returns an an object of
-  // {
-  //   winner: draw
-  // }
-  // in case of a draw
-
-  mini.endState = function () {
-    const noOpenSquares = this.board.indexOf(0) === -1;
+  mini.terminalState = function (board) {
+    const noOpenSquares = board.indexOf(0) === -1;
     const winningPosition = winningPositions.reduce((acc, curr) => {
-      const positions = curr.split('').map(elem => this.board[elem]);
+      const positions = curr.split('').map(elem => board[elem]);
       acc.push(positions);
       return acc;
     }, []).filter(elem => {
@@ -80,21 +65,41 @@ const minimax = (function () {
     });
 
     if (winningPosition.length) {
-      return (
-        {
-          winner: true,
-          sigil: winningPosition[0],
-          winningSquares: winningPosition.join(''),
-          winningDirection: winningDirections[winningPosition.join('')]
-        }
-      );
+      mini.result = winningPosition[0] + '-won';
+      return true;
     }
 
     if (noOpenSquares) {
-      return ({winner: 'DRAW'});
+      mini.result = 'draw';
+      return true;
     }
 
     return false;
+  };
+
+  mini.minimax = function(level, depth, board, player, alpha, beta) {
+    let score, bestSquare;
+
+    const endState = mini.endState();
+    if (endState) {
+      return endState;
+    }
+
+    if (player === 'computer') {
+      
+    }
+
+    function genMoves(potentialBoard, player) {
+      const boards = [];
+      potentialBoard.forEach((elem, ix) => {
+        if (elem === 0) {
+          const newBoard = potentialBoard;
+          newBoard[ix] = player === 'computer' ? 'o' : 'x';
+          boards.push(newBoard);
+        }
+      });
+      return boards;
+    }
   };
 
   return mini;
