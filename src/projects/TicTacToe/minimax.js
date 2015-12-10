@@ -33,18 +33,29 @@ const minimax = (function () {
 
   const mini =  {};
 
-  mini.board = [];
-  mini.playerTurn = true;
-  mini.depth = 0;
+  mini.init = function () {
+    mini.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    mini.status = 'running';
+    mini.currentState.depth = 0;
+    mini.currentState.turn = 'X';
+  };
 
-  mini.init = function (playerTurn) {
-    this.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    this.playerTurn = playerTurn;
+  mini.advance = function (newState) {
+    mini.currentState = Object.assign({}, mini.currentState, newState);
+    if (mini.terminalState(newState.board)) {
+      mini.status = 'ended';
+      // todo notify of winner
+    } else {
+      if (mini.currentState.turn === 'O') {
+        mini.givePlayerTheBusiness();
+      }
+    }
   };
 
   mini.advance = function () {
     mini.playerTurn = mini.playerTurn === 'X' ? 'O' : 'X';
   };
+
 
   mini.terminalState = function (board) {
     const noOpenSquares = board.indexOf(0) === -1;
@@ -77,28 +88,32 @@ const minimax = (function () {
     return false;
   };
 
-  mini.minimax = function(level, depth, board, player, alpha, beta) {
-    let score, bestSquare;
-
-    const endState = mini.endState();
-    if (endState) {
-      return endState;
+  mini.score = function (_state) {
+    if (_state.result !== 'running') {
+      if (_state.result === 'X-won') {
+        return 10 - _state.depth;
+      } else if (_state.result === 'O-won') {
+        return -10 + _state.depth;
+      }
     }
+    return 0;
+  };
 
-    if (player === 'computer') {
-      
-    }
+  mini.empties = function (board) {
+    return board.map((elem, index) => {
+      return {marking: elem, index};
+    })
+      .filter(elem => elem.marking === 0)
+      .map(elem => elem.index);
+  };
 
-    function genMoves(potentialBoard, player) {
-      const boards = [];
-      potentialBoard.forEach((elem, ix) => {
-        if (elem === 0) {
-          const newBoard = potentialBoard;
-          newBoard[ix] = player === 'computer' ? 'o' : 'x';
-          boards.push(newBoard);
-        }
-      });
-      return boards;
+  mini.AIMaximize = function (first, second) {
+    if (first.score < second.score) {
+      return -1;
+    } else if (first.score > second.score) {
+      return 1;
+    } else {
+      return 0;
     }
   };
 
