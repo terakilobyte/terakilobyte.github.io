@@ -33,30 +33,6 @@ const minimax = (function () {
 
   const mini =  {};
 
-  mini.init = function () {
-    mini.board = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    mini.status = 'running';
-    mini.currentState.depth = 0;
-    mini.currentState.turn = 'X';
-  };
-
-  mini.advance = function (newState) {
-    mini.currentState = Object.assign({}, mini.currentState, newState);
-    if (mini.terminalState(newState.board)) {
-      mini.status = 'ended';
-      // todo notify of winner
-    } else {
-      if (mini.currentState.turn === 'O') {
-        mini.givePlayerTheBusiness();
-      }
-    }
-  };
-
-  mini.advance = function () {
-    mini.playerTurn = mini.playerTurn === 'X' ? 'O' : 'X';
-  };
-
-
   mini.terminalState = function (board) {
     const noOpenSquares = board.indexOf(0) === -1;
     const winningPosition = winningPositions.reduce((acc, curr) => {
@@ -76,47 +52,15 @@ const minimax = (function () {
     });
 
     if (winningPosition.length) {
-      mini.result = winningPosition[0] + '-won';
-      return true;
+      return {endState: true, result: winningPosition[0] + '-won', winningPosition};
     }
 
     if (noOpenSquares) {
-      mini.result = 'draw';
-      return true;
+      return {endState: true, result: 'draw'};
     }
 
     return false;
   };
-
-  mini.score = function (_state) {
-    if (_state.result !== 'running') {
-      if (_state.result === 'X-won') {
-        return 10 - _state.depth;
-      } else if (_state.result === 'O-won') {
-        return -10 + _state.depth;
-      }
-    }
-    return 0;
-  };
-
-  mini.empties = function (board) {
-    return board.map((elem, index) => {
-      return {marking: elem, index};
-    })
-      .filter(elem => elem.marking === 0)
-      .map(elem => elem.index);
-  };
-
-  mini.AIMaximize = function (first, second) {
-    if (first.score < second.score) {
-      return -1;
-    } else if (first.score > second.score) {
-      return 1;
-    } else {
-      return 0;
-    }
-  };
-
   return mini;
 })();
 
