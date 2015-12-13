@@ -6,7 +6,7 @@ import { PLAYER_MOVE,
          DEPTH_INCREMENT } from 'constants/tictactoe';
 
 export default {
-  player_move: () => ({ type : PLAYER_MOVE }),
+  player_move: (payload) => ({ type : PLAYER_MOVE, payload }),
   computer_move: () => ({ type : COMPUTER_MOVE }),
   player_win: () => ({ type : PLAYER_WIN }),
   computer_win: () => ({ type : COMPUTER_WIN }),
