@@ -23,23 +23,23 @@
 /* Final Status */
 .final-45 {
   @include linear-gradient(45deg,
-               $textColor 45%,
-              $background 0, $background 55%, $textColor 0);
+               $background 45%,
+              $textColor 0, $textColor 55%, $background 0);
 }
 .final-135 {
   @include linear-gradient(135deg,
-               $textColor 45%,
-              $background 0, $background 55%, $textColor 0);
+               $background 45%,
+              $textColor 0, $textColor 55%, $background 0);
 }
 .final-90 {
   @include linear-gradient(90deg,
-               $textColor 45%,
-              $background 0, $background 55%, $textColor 0);
+               $background 45%,
+              $textColor 0, $textColor 55%, $background 0);
 }
 .final-180 {
   @include linear-gradient(180deg,
-               $textColor 45%,
-              $background 0, $background 55%, $textColor 0);
+               $background 45%,
+              $textColor 0, $textColor 55%, $background 0);
 }
 
 /* Boxes */
