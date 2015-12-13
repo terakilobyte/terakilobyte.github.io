@@ -1,6 +1,7 @@
 import { createReducer }     from '../utils';
 import { PLAYER_MOVE,
          COMPUTER_MOVE,
+         INIT,
          RESET_GAME } from 'constants/tictactoe';
 
 import mini from 'projects/TicTacToe/minimax.js';
@@ -16,7 +17,9 @@ const initialState = {
   board: [0, 0, 0, 0, 0, 0, 0, 0, 0],
   depth: 0,
   playerTurn: true,
-  winner: false
+  winner: false,
+  playerSigil: '',
+  computerSigil: ''
 };
 
 export default createReducer(initialState, {
@@ -24,15 +27,14 @@ export default createReducer(initialState, {
     let newState = Object.assign({}, state);
     let newBoard = state.board.slice();
     let move = tileBoard.indexOf(payload.move);
-    newBoard[move] = 'X';
+    newBoard[move] = state.playerSigil;
     newState.board = newBoard;
     newState.playerTurn = !newState.playerTurn;
     newState.winner = mini.terminalState(newState.board);
     return newState;
   },
   [COMPUTER_MOVE]: (state) => {
-    mini.minimax(state.board, state.depth, 'O');
-    console.log('mini choice', mini.choice);
+    mini.minimax(state.board, state.depth, state.computerSigil);
     let newState = Object.assign({}, state);
     newState.depth = newState.depth + 1;
     newState.board = mini.choice;
@@ -42,5 +44,11 @@ export default createReducer(initialState, {
   },
   [RESET_GAME]: () => {
     return initialState;
+  },
+  [INIT]: (initalState, payload) => {
+    let newState = Object.assign(initialState, payload);
+    newState.playerTurn = newState.playerSigil === 'X';
+    newState.computerSigil = newState.playerSigil === 'X' ? 'O' : 'X';
+    return newState;
   }
 });

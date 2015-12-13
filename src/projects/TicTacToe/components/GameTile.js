@@ -9,6 +9,11 @@ const columns = {
   2: 'Right'
 };
 
+const classes = {
+  'O': 'nought',
+  'X': 'cross'
+};
+
 const tileMap = {
   'topLeft': 0,
   'topMiddle': 1,
@@ -25,7 +30,9 @@ const mapStateToProps = (state) => {
   return {
     gameBoard: state.tictactoe.board,
     winner: state.tictactoe.winner,
-    playerTurn: state.tictactoe.playerTurn
+    playerTurn: state.tictactoe.playerTurn,
+    playerSigil: state.tictactoe.playerSigil,
+    computerSigil: state.tictactoe.computerSigil
   };
 };
 
@@ -36,22 +43,21 @@ class GameTile extends React.Component {
     player_move: React.PropTypes.func.isRequired,
     gameBoard: React.PropTypes.array.isRequired,
     playerTurn: React.PropTypes.bool,
-    tileClick: React.PropTypes.func
+    tileClick: React.PropTypes.func,
+    playerSigil: React.PropTypes.string,
+    computerSigil: React.PropTypes.string
   }
 
   constructor (props) {
     super(props);
     this.state = {
-      tile: `${this.props.row}${columns[this.props.column]}`,
-      sigil: '',
-      playerTurn: this.props.playerTurn
+      tile: `${this.props.row}${columns[this.props.column]}`
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillReceiveProps (propObj) {
-    this.setState({playerTurn: propObj.playerTurn});
-    if (propObj.gameBoard[tileMap[this.state.tile]] === 'O') {
+    if (propObj.gameBoard[tileMap[this.state.tile]] === this.props.computerSigil) {
       this.handleComputer();
     }
 
@@ -65,10 +71,6 @@ class GameTile extends React.Component {
         this.disable();
       }
     }
-
-    if (propObj.gameBoard[tileMap[this.state.tile]] === 'X') {
-      this.handleUser();
-    }
   }
 
   handleComputer () {
@@ -77,7 +79,9 @@ class GameTile extends React.Component {
     input.setAttribute('disabled', 'true');
     const tile = this.refs.tile;
     tile.classList.remove('active');
-    tile.classList.add('nought');
+    setTimeout(() => {
+      tile.classList.add(classes[this.props.computerSigil]);
+    });
   }
 
   disable () {
@@ -92,15 +96,7 @@ class GameTile extends React.Component {
     const tile = this.refs.tile;
     setTimeout(() => {
       tile.classList.add(direction);
-    }, 1000);
-  }
-
-  handleUser () {
-    const input = this.refs.input;
-    input.setAttribute('disabled', 'true');
-    const tile = this.refs.tile;
-    tile.classList.remove('active');
-    tile.classList.add('cross');
+    }, 200);
   }
 
   handleClick () {
@@ -109,8 +105,9 @@ class GameTile extends React.Component {
       input.setAttribute('disabled', 'true');
       const tile = this.refs.tile;
       tile.classList.remove('active');
-      tile.classList.add('cross');
-      this.setState({playerTurn: !this.state.playerTurn});
+      setTimeout(() => {
+        tile.classList.add(classes[this.props.playerSigil]);
+      });
       setTimeout(() => {
         this.props.player_move({move: this.state.tile});
       });

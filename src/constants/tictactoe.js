@@ -3,5 +3,6 @@ import { createConstants } from '../utils';
 export default createConstants(
   'PLAYER_MOVE',
   'COMPUTER_MOVE',
-  'RESET_GAME'
+  'RESET_GAME',
+  'INIT'
 );
