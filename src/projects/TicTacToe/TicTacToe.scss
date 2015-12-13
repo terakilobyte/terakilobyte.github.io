@@ -42,6 +42,10 @@
                            $textColor 0, $textColor 55%, $background 0);
 }
 
+.disable {
+  animation: explode .1s;
+}
+
 /* Boxes */
 input[type='checkbox'] {
   display: none;

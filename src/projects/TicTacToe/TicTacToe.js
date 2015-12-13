@@ -8,8 +8,7 @@ import GameBoard from './components/GameBoard';
 const mapStateToProps = (state) => {
   return {
     playerTurn: state.tictactoe.playerTurn,
-    winner: state.tictactoe.winner,
-    gameKey: state.tictactoe.gameKey
+    winner: state.tictactoe.winner
   };
 };
 
@@ -19,28 +18,23 @@ class TicTacToe extends React.Component {
     playerTurn: React.PropTypes.bool,
     computer_move: React.PropTypes.func,
     winner: React.PropTypes.bool,
-    reset_game: React.PropTypes.func,
-    gameKey: React.PropTypes.number.isRequired
+    reset_game: React.PropTypes.func
 
   }
 
   constructor (props) {
     super(props);
     this.state = {
-      message: '',
       gameKey: Date.now()
     };
     this.handleReset = this.handleReset.bind(this);
   }
 
   componentWillReceiveProps (propObj) {
-    if (!propObj.playerTurn) {
-      this.props.computer_move();
-    }
-    if (propObj.winner && propObj.winner.result === 'draw') {
-      this.setState({message: 'DRAW'});
-    } else if (propObj.winner) {
-      this.setState({message: 'YOU LOSE'});
+    if (!propObj.winner) {
+      if (!propObj.playerTurn) {
+        this.props.computer_move();
+      }
     }
     // nothing else, the player can't win
   }
@@ -53,10 +47,12 @@ class TicTacToe extends React.Component {
   render () {
     let notifier;
 
-    if (this.props.winner) {
+    if (this.props.winner.result) {
+      const message = this.props.winner.result === 'draw' ? 'IT\'S A ' + this.props.winner.result.toUpperCase()
+              : this.props.winner.result.toUpperCase().split(/-/).join(' ');
       notifier = (
         <div className='text-center'>
-          <h1 className='text-center'>{this.state.message}</h1><span className='reset' onClick={this.handleReset}>Reset</span>
+          <h1 className='text-center'>{message}</h1><span className='reset' onClick={this.handleReset}>Reset</span>
         </div>
       );
     }
@@ -67,6 +63,7 @@ class TicTacToe extends React.Component {
         <h3 className='text-center'>You can't win</h3>
         <hr />
         <GameBoard key={this.state.gameKey} />
+        <hr />
         {notifier}
       </div>
     );

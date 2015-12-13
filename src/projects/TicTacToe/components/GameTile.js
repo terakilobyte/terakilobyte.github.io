@@ -50,14 +50,16 @@ class GameTile extends React.Component {
     }
 
     if (propObj.winner) {
-      this.disable();
       if (propObj.winner.result !== 'draw') {
         let index = propObj.winner.winningTiles.indexOf(this.state.tile);
         if (index !== -1) {
           this.handleWinner(propObj.winner.winningDirection);
         }
+      } else {
+        this.disable();
       }
     }
+
     if (propObj.gameBoard[tileMap[this.state.tile]] === 'X') {
       this.handleUser();
     }
@@ -76,7 +78,10 @@ class GameTile extends React.Component {
 
   disable () {
     const input = this.refs.input;
+    input.click();
     input.setAttribute('disabled', 'true');
+    const tile = this.refs.tile;
+    tile.classList.remove('active');
   }
 
   handleWinner (direction) {
