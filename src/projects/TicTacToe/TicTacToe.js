@@ -36,15 +36,17 @@ class TicTacToe extends React.Component {
     };
     this.handleReset = this.handleReset.bind(this);
     this.firstReset = this.firstReset.bind(this);
-    this.handleUserClickThrottled = throttle(this.handleUserClick, 5000);
-    this.throttledComputerMove = throttle(this.computerMove, 500);
+    this.handleUserClickThrottled = throttle(this.handleUserClick.bind(this), 5000);
+    this.throttledComputerMove = throttle(this.computerMove, 5000);
   }
 
   componentWillReceiveProps (propObj) {
     if (!propObj.winner) {
       if (!propObj.playerTurn) {
-        this.throttledComputerMove();
-        this.handleUserClickThrottled.cancel();
+        setTimeout(() => {
+          this.throttledComputerMove();
+          this.handleUserClickThrottled.cancel();
+        }, 200);
       }
     }
     // nothing else, the player can't win
@@ -55,24 +57,27 @@ class TicTacToe extends React.Component {
   }
 
   handleUserClick (fun) {
-    fun();
+    if (!this.props.winner && this.props.playerTurn) {
+      fun();
+      this.throttledComputerMove.cancel();
+    }
   }
 
   firstReset () {
     this.props.reset_game();
     this.setState({playerSigil: ''});
-    this.forceUpdate();
   }
 
   handleReset () {
     this.handleUserClickThrottled.cancel();
+    this.throttledComputerMove.cancel();
     this.props.reset_game();
     this.props.init({playerSigil: arguments[0]});
     this.setState({gameKey: Date.now(), playerSigil: arguments[0]});
     if (arguments[0] === 'O') {
       setTimeout(() => {
-        this.props.computer_move();
-      });
+        this.throttledComputerMove();
+      }, 200);
     }
   }
 

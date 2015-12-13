@@ -94,6 +94,7 @@ class GameTile extends React.Component {
 
   handleWinner (direction) {
     const tile = this.refs.tile;
+    this.disable();
     setTimeout(() => {
       tile.classList.add(direction);
     }, 200);
