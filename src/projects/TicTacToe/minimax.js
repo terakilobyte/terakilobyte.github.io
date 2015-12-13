@@ -1,5 +1,4 @@
 const minimax = (function () {
-  'use strict';
   const winningPositions = [
     '012', '036', '048', '147', '258', '345', '678', '246'
   ];
@@ -32,9 +31,6 @@ const minimax = (function () {
     return acc;
   }, {});
 
-  const mini =  {};
-  mini.choice = [];
-
   function all (arr, pred) {
     let hasAll = true;
     arr.forEach(elem => {
@@ -45,15 +41,27 @@ const minimax = (function () {
     return hasAll;
   }
 
+  const mini =  {};
+  mini.choice = [];
+
+  mini.diff = function (oldBoard, newBoard) {
+    return newBoard.reduce((acc, curr, index) => {
+      if (curr !== oldBoard[index]) {
+        /*eslint-disable*/
+        acc = index;
+        /*eslint-enable*/
+      }
+      return acc;
+    }, -1);
+  };
+
   mini.terminalState = function (board) {
     const noOpenSquares = board.indexOf(0) === -1;
     const winningPosition = winningPositions.reduce((acc, curr) => {
-      const positions = curr.split('')
-              .map(elem => ({position: board[elem], index: elem}));
+      const positions = curr.split('').map(elem => ({position: board[elem], index: elem}));
       acc.push(positions);
       return acc;
-    }, [])
-    .filter(elem => {
+    }, []).filter(elem => {
       return all(elem, item => item.position === 'O')
         || all(elem, item => item.position === 'X');
     });
@@ -78,7 +86,7 @@ const minimax = (function () {
   };
 
   mini.getMoves = function (board, player) {
-    const children = [];
+    let children = [];
     board.map((elem, index) => ({elem, index}))
       .filter(elem => elem.elem === 0)
       .forEach(elem => {
@@ -88,7 +96,6 @@ const minimax = (function () {
       });
     return children;
   };
-
 
   mini.score = function (board, depth) {
     const result = mini.terminalState(board);
@@ -109,13 +116,14 @@ const minimax = (function () {
   };
 
   mini.minimax = function (board, depth, player) {
-    const result = mini.terminalState(board);
+    let result = mini.terminalState(board);
     if (result) {
-      return mini.score(board);
+      return mini.score(board, depth);
     }
 
-    const scores = [];
-    const children = mini.getMoves(board, player);
+    let scores = [];
+    // depth = depth + 1;
+    let children = mini.getMoves(board, player);
     children.forEach(child => {
       scores.push(mini.minimax(child,
                                depth + 1,
@@ -124,7 +132,8 @@ const minimax = (function () {
                  );
     });
     let best;
-    const possibles = scores.map((score, index) => ({score, index}));
+    let possibles = scores.map((score, index) => ({score, index}));
+
     if (player === 'O') {
       best = possibles.sort((a, b) => a.score - b.score).pop();
     } else {
@@ -133,6 +142,7 @@ const minimax = (function () {
     mini.choice = children[best.index];
     return best.score;
   };
+
 
   return mini;
 })();
