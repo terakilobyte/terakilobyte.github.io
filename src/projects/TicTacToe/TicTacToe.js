@@ -57,7 +57,7 @@ class TicTacToe extends React.Component {
   }
 
   handleUserClick (fun) {
-    if (!this.props.winner && this.props.playerTurn) {
+    if (!this.props.winner) {
       fun();
       this.throttledComputerMove.cancel();
     }

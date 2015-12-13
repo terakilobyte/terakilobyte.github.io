@@ -18,8 +18,8 @@ const initialState = {
   depth: 0,
   playerTurn: true,
   winner: false,
-  playerSigil: '',
-  computerSigil: ''
+  playerSigil: 'X',
+  computerSigil: 'O'
 };
 
 export default createReducer(initialState, {
