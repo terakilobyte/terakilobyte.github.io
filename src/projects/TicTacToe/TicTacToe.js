@@ -51,6 +51,7 @@ class TicTacToe extends React.Component {
 
   handleReset () {
     this.props.reset_game();
+    this.handleUserClickThrottled.cancel();
     this.setState({gameKey: Date.now(), message: ''});
   }
 

@@ -5,10 +5,6 @@ import { PLAYER_MOVE,
 export default {
   player_move: (payload) => (
     {
-      meta:
-      {
-        debounce: 'simple'
-      },
       type : PLAYER_MOVE,
       payload
     }

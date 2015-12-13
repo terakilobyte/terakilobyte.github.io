@@ -32,6 +32,7 @@ export default createReducer(initialState, {
   },
   [COMPUTER_MOVE]: (state) => {
     mini.minimax(state.board, state.depth, 'O');
+    console.log('mini choice', mini.choice);
     let newState = Object.assign({}, state);
     newState.depth = newState.depth + 1;
     newState.board = mini.choice;

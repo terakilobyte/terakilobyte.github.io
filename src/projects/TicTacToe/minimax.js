@@ -56,6 +56,8 @@ const minimax = (function () {
   };
 
   mini.terminalState = function (board) {
+    if (typeof board === 'undefined') {
+    }
     const noOpenSquares = board.indexOf(0) === -1;
     const winningPosition = winningPositions.reduce((acc, curr) => {
       const positions = curr.split('').map(elem => ({position: board[elem], index: elem}));
@@ -108,39 +110,65 @@ const minimax = (function () {
         return 0;
       }
     }
-    return 0;
+    return 0 + depth;
   };
 
   mini.convertBoardToArray = function (board) {
     return boardToArray(board);
   };
 
-  mini.minimax = function (board, depth, player) {
+  mini.minimax = function (board, depth, player, alpha = -Infinity, beta = Infinity) {
     let result = mini.terminalState(board);
     if (result) {
       return mini.score(board, depth);
     }
 
-    let scores = [];
-    // depth = depth + 1;
+    let nextPlayer = player === 'O' ? 'X' : 'O';
     let children = mini.getMoves(board, player);
-    children.forEach(child => {
-      scores.push(mini.minimax(child,
-                               depth + 1,
-                               player === 'O' ? 'X' : 'O'
-                              )
-                 );
-    });
     let best;
-    let possibles = scores.map((score, index) => ({score, index}));
+    let bestIndex;
 
     if (player === 'O') {
-      best = possibles.sort((a, b) => a.score - b.score).pop();
+      best = -Infinity;
+      for (let i = 0; i < children.length; i++) {
+        let possible = mini.minimax(children[i],
+                                    depth + 1,
+                                    nextPlayer,
+                                    alpha,
+                                    beta);
+        if (possible > best) {
+          best = possible;
+          bestIndex = i;
+        }
+        /*eslint-disable*/
+        alpha = Math.max(alpha, best);
+        /*eslint-enable*/
+        if (beta <= alpha) {
+          break;
+        }
+      }
     } else {
-      best = possibles.sort((a, b) => b.score - a.score).pop();
+      best = Infinity;
+      for (let i = 0; i < children.length; i++) {
+        let possible = mini.minimax(children[i],
+                                    depth + 1,
+                                    nextPlayer,
+                                    alpha,
+                                    beta);
+        if (possible < best) {
+          best = possible;
+          bestIndex = i;
+        }
+        /*eslint-disable*/
+        beta = Math.min(beta, best);
+        /*eslint-enable*/
+        if (beta <= alpha) {
+          break;
+        }
+      }
     }
-    mini.choice = children[best.index];
-    return best.score;
+    mini.choice = children[bestIndex];
+    return best;
   };
 
 
