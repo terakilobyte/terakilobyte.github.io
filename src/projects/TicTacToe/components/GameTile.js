@@ -24,7 +24,8 @@ const tileMap = {
 const mapStateToProps = (state) => {
   return {
     gameBoard: state.tictactoe.board,
-    winner: state.tictactoe.winner
+    winner: state.tictactoe.winner,
+    playerTurn: state.tictactoe.playerTurn
   };
 };
 
@@ -33,18 +34,23 @@ class GameTile extends React.Component {
     row: React.PropTypes.string.isRequired,
     column: React.PropTypes.number.isRequired,
     player_move: React.PropTypes.func.isRequired,
-    gameBoard: React.PropTypes.array.isRequired
+    gameBoard: React.PropTypes.array.isRequired,
+    playerTurn: React.PropTypes.bool,
+    tileClick: React.PropTypes.func
   }
 
   constructor (props) {
     super(props);
     this.state = {
       tile: `${this.props.row}${columns[this.props.column]}`,
-      sigil: ''
+      sigil: '',
+      playerTurn: this.props.playerTurn
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillReceiveProps (propObj) {
+    this.setState({playerTurn: propObj.playerTurn});
     if (propObj.gameBoard[tileMap[this.state.tile]] === 'O') {
       this.handleComputer();
     }
@@ -71,9 +77,7 @@ class GameTile extends React.Component {
     input.setAttribute('disabled', 'true');
     const tile = this.refs.tile;
     tile.classList.remove('active');
-    setTimeout(() => {
-      tile.classList.add('nought');
-    }, 200);
+    tile.classList.add('nought');
   }
 
   disable () {
@@ -96,29 +100,29 @@ class GameTile extends React.Component {
     input.setAttribute('disabled', 'true');
     const tile = this.refs.tile;
     tile.classList.remove('active');
-    setTimeout(() => {
-      tile.classList.add('cross');
-    }, 200);
+    tile.classList.add('cross');
   }
 
   handleClick () {
-    const input = this.refs.input;
-    input.setAttribute('disabled', 'true');
-    const tile = this.refs.tile;
-    tile.classList.remove('active');
-    setTimeout(() => {
+    function clickThis () {
+      const input = this.refs.input;
+      input.setAttribute('disabled', 'true');
+      const tile = this.refs.tile;
+      tile.classList.remove('active');
       tile.classList.add('cross');
+      this.setState({playerTurn: !this.state.playerTurn});
       setTimeout(() => {
         this.props.player_move({move: this.state.tile});
-      }, 200);
-    }, 200);
+      });
+    }
+    this.props.tileClick(clickThis.bind(this));
   }
 
   render () {
     return (
       <div className='game-tile active' ref='tile'>
         <input id={this.state.tile}
-          onClick={this.handleClick.bind(this)}
+          onClick={this.handleClick}
           ref='input'
           type='checkbox' />
         <label htmlFor={this.state.tile} />

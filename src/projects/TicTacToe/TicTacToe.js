@@ -4,6 +4,7 @@ import { connect }            from 'react-redux';
 import ticTacToeActions from 'actions/tictactoe';
 
 import GameBoard from './components/GameBoard';
+import { throttle } from 'lodash';
 
 const mapStateToProps = (state) => {
   return {
@@ -18,7 +19,8 @@ class TicTacToe extends React.Component {
     playerTurn: React.PropTypes.bool,
     computer_move: React.PropTypes.func,
     winner: React.PropTypes.bool,
-    reset_game: React.PropTypes.func
+    reset_game: React.PropTypes.func,
+    player_move: React.PropTypes.func
 
   }
 
@@ -28,15 +30,23 @@ class TicTacToe extends React.Component {
       gameKey: Date.now()
     };
     this.handleReset = this.handleReset.bind(this);
+    this.handleUserClickThrottled = throttle(this.handleUserClick, 5000);
   }
 
   componentWillReceiveProps (propObj) {
     if (!propObj.winner) {
       if (!propObj.playerTurn) {
-        this.props.computer_move();
+        setTimeout(() => {
+          this.handleUserClickThrottled.cancel();
+          this.props.computer_move();
+        }, 300);
       }
     }
     // nothing else, the player can't win
+  }
+
+  handleUserClick (fun) {
+    fun();
   }
 
   handleReset () {
@@ -62,7 +72,8 @@ class TicTacToe extends React.Component {
         <h1 className='text-center'>Tic-Tac-Toe</h1>
         <h3 className='text-center'>You can't win</h3>
         <hr />
-        <GameBoard key={this.state.gameKey} />
+        <GameBoard key={this.state.gameKey}
+                   tileClick={this.handleUserClickThrottled}  />
         <hr />
         {notifier}
       </div>

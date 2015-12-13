@@ -12,13 +12,17 @@ const rows = {
 
 export default class GameRow extends React.Component {
   static propTypes = {
-    row: React.PropTypes.number.isRequired
+    row: React.PropTypes.number.isRequired,
+    tileClick: React.PropTypes.func
   }
 
   render () {
     const tiles = columns.map(elem => {
       return (
-        <GameTile column={elem} key={elem} row={rows[this.props.row]} />
+        <GameTile column={elem}
+                  key={elem}
+                  row={rows[this.props.row]}
+                  tileClick={this.props.tileClick} />
       );
     });
 

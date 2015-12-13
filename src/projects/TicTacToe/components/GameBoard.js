@@ -7,13 +7,16 @@ const rows = [0, 1, 2];
 
 class GameBoard extends React.Component {
   static propTypes = {
-    key: React.PropTypes.number
+    key: React.PropTypes.number,
+    tileClick: React.PropTypes.func
   }
 
   render () {
     const gameRows = rows.map(elem => {
       return (
-        <GameRow key={elem} row={elem} />
+        <GameRow key={elem}
+                 row={elem}
+                 tileClick={this.props.tileClick} />
       );
     });
 
