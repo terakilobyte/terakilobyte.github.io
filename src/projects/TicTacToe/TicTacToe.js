@@ -8,7 +8,8 @@ import GameBoard from './components/GameBoard';
 const mapStateToProps = (state) => {
   return {
     playerTurn: state.tictactoe.playerTurn,
-    winner: state.tictactoe.winner
+    winner: state.tictactoe.winner,
+    gameKey: state.tictactoe.gameKey
   };
 };
 
@@ -16,7 +17,19 @@ const mapStateToProps = (state) => {
 class TicTacToe extends React.Component {
   static propTypes = {
     playerTurn: React.PropTypes.bool,
-    computer_move: React.PropTypes.func
+    computer_move: React.PropTypes.func,
+    winner: React.PropTypes.bool,
+    reset_game: React.PropTypes.func,
+    gameKey: React.PropTypes.number.isRequired
+
+  }
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      message: '',
+      winner: false
+    };
   }
 
   componentWillReceiveProps (propObj) {
@@ -24,22 +37,31 @@ class TicTacToe extends React.Component {
       this.props.computer_move();
     }
     if (propObj.winner && propObj.winner.result === 'draw') {
-      // do very cool modal fadein
-      console.log('DRAW');
+      this.setState({message: 'DRAW'});
     } else if (propObj.winner) {
-      // do very cool modal fadein with computer winning
-      console.log('YOU LOST');
+      this.setState({message: 'YOU LOSE'});
     }
     // nothing else, the player can't win
   }
 
   render () {
+    let notifier;
+
+    if (this.props.winner) {
+      notifier = (
+        <div className='text-center'>
+          <h1 className='text-center'>{this.state.message}</h1><span className='reset' onClick={this.props.reset_game}>Reset</span>
+        </div>
+      );
+    }
+
     return (
-      <div>
+      <div key={this.props.gameKey}>
         <h1 className='text-center'>Tic-Tac-Toe</h1>
-        <h2 className='text-center'>Open your console to see messages</h2>
         <h3 className='text-center'>You can't win</h3>
-        <GameBoard />
+        <hr />
+        <GameBoard key={this.props.gameKey} />
+        {notifier}
       </div>
     );
   }

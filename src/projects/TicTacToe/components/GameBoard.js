@@ -5,18 +5,24 @@ import GameRow from './GameRow';
 
 const rows = [0, 1, 2];
 
-const GameBoard = () => {
-  const gameRows = rows.map(elem => {
-    return (
-      <GameRow key={elem} row={elem} />
-    );
-  });
+class GameBoard extends React.Component {
+  static propTypes = {
+    key: React.PropTypes.number
+  }
 
-  return (
-    <div className='game-board'>
-      {gameRows}
-    </div>
-  );
-};
+  render () {
+    const gameRows = rows.map(elem => {
+      return (
+        <GameRow key={elem} row={elem} />
+      );
+    });
+
+    return (
+      <div className='game-board'>
+        {gameRows}
+      </div>
+    );
+  }
+}
 
 export default GameBoard;

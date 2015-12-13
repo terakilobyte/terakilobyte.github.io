@@ -2,15 +2,15 @@
 
 /* Icons */
 .cross:before, .nought:before {
-  display: block;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 2em;
-  line-height: 50px;
-  animation: shake .1s,
-             explode .05s;
-}
+                 display: block;
+                 width: 100%;
+                 height: 100%;
+                 text-align: center;
+                 font-size: 2em;
+                 line-height: 50px;
+                 animation: shake .1s,
+                 explode .05s;
+               }
 
 .cross:before {
   content: 'X';
@@ -23,23 +23,23 @@
 /* Final Status */
 .final-45 {
   @include linear-gradient(45deg,
-               $background 45%,
-              $textColor 0, $textColor 55%, $background 0);
+                           $background 45%,
+                           $textColor 0, $textColor 55%, $background 0);
 }
 .final-135 {
   @include linear-gradient(135deg,
-               $background 45%,
-              $textColor 0, $textColor 55%, $background 0);
+                           $background 45%,
+                           $textColor 0, $textColor 55%, $background 0);
 }
 .final-90 {
   @include linear-gradient(90deg,
-               $background 45%,
-              $textColor 0, $textColor 55%, $background 0);
+                           $background 45%,
+                           $textColor 0, $textColor 55%, $background 0);
 }
 .final-180 {
   @include linear-gradient(180deg,
-               $background 45%,
-              $textColor 0, $textColor 55%, $background 0);
+                           $background 45%,
+                           $textColor 0, $textColor 55%, $background 0);
 }
 
 /* Boxes */
@@ -68,6 +68,22 @@ input[type='checkbox'] {
   }
 }
 
+.reset {
+  font-size: 14px;
+  display: inline-block;
+  color: $navigationLink;
+  transition: background-color 0.2s ease;
+  background-color: $darksalmon;
+  &:hover {
+    background-color: darken($darksalmon, 10%);
+    color: $navigationLinkHover;
+    cursor: pointer;
+  }
+
+  text-decoration: none;
+  padding: 10px 10px;
+}
+
 .game-tile {
   float: left;
   width: 50px;
@@ -81,7 +97,7 @@ input[type='checkbox'] {
 }
 
 .active {
-   &:hover {
+  &:hover {
     background-color: $tileHover;
   } 
 }

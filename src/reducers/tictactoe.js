@@ -1,10 +1,7 @@
 import { createReducer }     from '../utils';
 import { PLAYER_MOVE,
          COMPUTER_MOVE,
-         PLAYER_WIN,
-         COMPUTER_WIN,
-         DRAW_GAME,
-         DEPTH_INCREMENT } from 'constants/tictactoe';
+         RESET_GAME } from 'constants/tictactoe';
 
 import mini from 'projects/TicTacToe/minimax.js';
 
@@ -18,7 +15,8 @@ const initialState = {
   playerSigil: 'X',
   computerSigil: 'O',
   playerTurn: true,
-  winner: false
+  winner: false,
+  gameKey: Date.now()
 };
 
 export default createReducer(initialState, {
@@ -40,5 +38,8 @@ export default createReducer(initialState, {
     newState.playerTurn = !newState.playerTurn;
     newState.winner = mini.terminalState(newState.board);
     return newState;
+  },
+  [RESET_GAME]: () => {
+    return initialState;
   }
 });
