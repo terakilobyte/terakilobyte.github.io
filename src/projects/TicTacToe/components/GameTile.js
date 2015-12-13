@@ -23,7 +23,8 @@ const tileMap = {
 
 const mapStateToProps = (state) => {
   return {
-    gameBoard: state.tictactoe.board
+    gameBoard: state.tictactoe.board,
+    winner: state.tictactoe.winner
   };
 };
 
@@ -43,37 +44,46 @@ class GameTile extends React.Component {
     };
   }
 
-  // shouldComponentUpdate () {
-  //   if (this.props.gameBoard[tileMap[this.state.tile]] === 'O') {
-  //     console.log('update called');
-  //     return this.handleComputer();
-  //   }
-  //   if (this.props.gameBoard[tileMap[this.state.tile]] === 'X') {
-  //     return this.handleUser();
-  //   }
-  //   return false;
-  // }
-
   componentWillReceiveProps (propObj) {
     if (propObj.gameBoard[tileMap[this.state.tile]] === 'O') {
-      console.log('update called', propObj);
-      return this.handleComputer();
+      this.handleComputer();
     }
-    if (this.props.gameBoard[tileMap[this.state.tile]] === 'X') {
-      return this.handleUser();
+
+    if (propObj.winner) {
+      this.disable();
+      if (propObj.winner.result !== 'draw') {
+        let index = propObj.winner.winningTiles.indexOf(this.state.tile);
+        if (index !== -1) {
+          this.handleWinner(propObj.winner.winningDirection);
+        }
+      }
+    }
+    if (propObj.gameBoard[tileMap[this.state.tile]] === 'X') {
+      this.handleUser();
     }
   }
 
   handleComputer () {
-    console.log('handle computer called');
     const input = this.refs.input;
+    input.click();
     input.setAttribute('disabled', 'true');
     const tile = this.refs.tile;
     tile.classList.remove('active');
     setTimeout(() => {
       tile.classList.add('nought');
     }, 200);
-    return true;
+  }
+
+  disable () {
+    const input = this.refs.input;
+    input.setAttribute('disabled', 'true');
+  }
+
+  handleWinner (direction) {
+    const tile = this.refs.tile;
+    setTimeout(() => {
+      tile.classList.add(direction);
+    }, 1000);
   }
 
   handleUser () {
@@ -84,7 +94,6 @@ class GameTile extends React.Component {
     setTimeout(() => {
       tile.classList.add('cross');
     }, 200);
-    return true;
   }
 
   handleClick () {

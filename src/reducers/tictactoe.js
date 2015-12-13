@@ -17,7 +17,8 @@ const initialState = {
   depth: 0,
   playerSigil: 'X',
   computerSigil: 'O',
-  playerTurn: true
+  playerTurn: true,
+  winner: false
 };
 
 export default createReducer(initialState, {
@@ -28,6 +29,7 @@ export default createReducer(initialState, {
     newBoard[move] = state.playerSigil;
     newState.board = newBoard;
     newState.playerTurn = !newState.playerTurn;
+    newState.winner = mini.terminalState(newState.board);
     return newState;
   },
   [COMPUTER_MOVE]: (state) => {
@@ -36,7 +38,7 @@ export default createReducer(initialState, {
     newState.depth = newState.depth + 1;
     newState.board = mini.choice;
     newState.playerTurn = !newState.playerTurn;
-    console.log(newState);
+    newState.winner = mini.terminalState(newState.board);
     return newState;
   }
 });
