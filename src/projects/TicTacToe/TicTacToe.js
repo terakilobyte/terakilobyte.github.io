@@ -28,8 +28,9 @@ class TicTacToe extends React.Component {
     super(props);
     this.state = {
       message: '',
-      winner: false
+      gameKey: Date.now()
     };
+    this.handleReset = this.handleReset.bind(this);
   }
 
   componentWillReceiveProps (propObj) {
@@ -44,23 +45,28 @@ class TicTacToe extends React.Component {
     // nothing else, the player can't win
   }
 
+  handleReset () {
+    this.props.reset_game();
+    this.setState({gameKey: Date.now(), message: ''});
+  }
+
   render () {
     let notifier;
 
     if (this.props.winner) {
       notifier = (
         <div className='text-center'>
-          <h1 className='text-center'>{this.state.message}</h1><span className='reset' onClick={this.props.reset_game}>Reset</span>
+          <h1 className='text-center'>{this.state.message}</h1><span className='reset' onClick={this.handleReset}>Reset</span>
         </div>
       );
     }
 
     return (
-      <div key={this.props.gameKey}>
+      <div key={this.state.gameKey}>
         <h1 className='text-center'>Tic-Tac-Toe</h1>
         <h3 className='text-center'>You can't win</h3>
         <hr />
-        <GameBoard key={this.props.gameKey} />
+        <GameBoard key={this.state.gameKey} />
         {notifier}
       </div>
     );
