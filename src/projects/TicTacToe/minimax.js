@@ -56,8 +56,6 @@ const minimax = (function () {
   };
 
   mini.terminalState = function (board) {
-    if (typeof board === 'undefined') {
-    }
     const noOpenSquares = board.indexOf(0) === -1;
     const winningPosition = winningPositions.reduce((acc, curr) => {
       const positions = curr.split('').map(elem => ({position: board[elem], index: elem}));
