@@ -52,6 +52,10 @@ class TicTacToe extends React.Component {
     // nothing else, the player can't win
   }
 
+  componentWillUnmount () {
+    this.props.reset_game();
+  }
+
   computerMove () {
     this.props.computer_move();
   }
